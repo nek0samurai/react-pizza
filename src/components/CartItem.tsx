@@ -1,8 +1,18 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addItems, minusItem, removeItems } from '../redux/slices/cartSlice';
 
-const CartItem = ({ id, price, imageUrl, size, title, type, count }) => {
+type CartItemProps = {
+  id: string;
+  price: number;
+  imageUrl: string;
+  size: number;
+  title: string;
+  type: string;
+  count: number;
+}
+
+const CartItem: React.FC<CartItemProps> = ({ id, price, imageUrl, size, title, type, count }) => {
   const dispatch = useDispatch();
 
   const incrementPizza = () => {

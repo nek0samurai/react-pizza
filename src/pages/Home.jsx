@@ -1,26 +1,23 @@
-import Sort from '../components/Sort';
-import Categories from '../components/Categories';
+import Sort from '../components/Sort.tsx';
+import Categories from '../components/Categories.tsx';
 import PizzaBlock from '../components/PizzaBlock';
-import React, { useState } from 'react';
+import React from 'react';
 import Skeleton from '../components/PizzaBlock/Skeleton';
 // import NotFound from './NotFound'
 import { useSelector, useDispatch } from 'react-redux';
 import { setCategoryId } from '../redux/slices/filterSlice';
 import { fetchPizzas } from '../redux/slices/pizzaSlice';
-import { SearchContext } from '../App';
 
 function Home() {
   const dispatch = useDispatch();
   const categoryId = useSelector((state) => state.filter.categoryId);
-
+  const searchValue = useSelector((state) => state.filter.searchValue);
   const sortType = useSelector((state) => state.filter.sort.sortProperty);
 
   const onClickCategory = (id) => {
     dispatch(setCategoryId(id));
     // console.log(id);
   };
-
-  const { searchValue } = React.useContext(SearchContext);
 
   const { items, status } = useSelector((state) => state.pizza);
 
@@ -49,7 +46,6 @@ function Home() {
     <>
       <div className="content__top">
         <Categories value={categoryId} onClickCategory={(id) => onClickCategory(id)} />
-
         <Sort />
       </div>
       <h2 className="content__title">Все пиццы</h2>

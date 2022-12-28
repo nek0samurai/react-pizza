@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { setSort } from '../redux/slices/filterSlice';
+import { selectSort, setSort } from '../redux/slices/filterSlice';
 
-const sortArr = [
+type SortArr = {
+  name: string;
+  sortProperty: string;
+}
+
+const sortArr: SortArr[] = [
   { name: 'популярности (по возр.)', sortProperty: '-rating' },
   { name: 'популярности (по уб.)', sortProperty: 'rating' },
   { name: 'цене (по возр.)', sortProperty: 'price' },
@@ -14,18 +19,18 @@ const sortArr = [
 
 function Sort() {
   const dispatch = useDispatch();
-  const sort = useSelector((state) => state.filter.sort);
-  const sortRef = React.useRef();
+  const sort = useSelector(selectSort);
+  const sortRef = React.useRef(null);
 
   const [showPopup, setShowPopup] = useState(false);
 
-  const onClickListItem = (obj) => {
+  const onClickListItem = (obj: SortArr) => {
     dispatch(setSort(obj));
     setShowPopup(false);
   };
 
   React.useEffect(() => {
-    const outsideFunction = (e) => {
+    const outsideFunction = (e: any) => {
       if (!e.path.includes(sortRef.current)) {
         setShowPopup(false);
       }

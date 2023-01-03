@@ -2,7 +2,7 @@ import React from 'react';
 
 type CategoriesSort = {
   value: number;
-  onClickCategory: any;
+  onClickCategory: (i: number) => void;
 }
 
 const Categories: React.FC<CategoriesSort> = ({ value, onClickCategory }) => {

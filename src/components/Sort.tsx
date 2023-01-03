@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { selectSort, setSort } from '../redux/slices/filterSlice';
+import { filterState, setSort } from '../redux/slices/filterSlice';
 
 type SortArr = {
   name: string;
@@ -19,7 +19,7 @@ const sortArr: SortArr[] = [
 
 function Sort() {
   const dispatch = useDispatch();
-  const sort = useSelector(selectSort);
+  const {sort} = useSelector(filterState);
   const sortRef = React.useRef(null);
 
   const [showPopup, setShowPopup] = useState(false);
